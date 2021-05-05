@@ -465,7 +465,9 @@ namespace Intersect.Client.Entities
         public virtual float GetMovementTime()
         {
             var time = 1000f / (float)( 1 + Math.Log( Stat[(int)Stats.Speed] ) );
-            if( Running == 1 )
+            var StaminaCheck = Vital[(int)Vitals.Mana];
+            
+            if( Running == 1 && StaminaCheck != 0 )
             {
                 time *= 0.5f;
             }
