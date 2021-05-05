@@ -43,7 +43,7 @@ namespace Intersect.Client.Networking
 
         public static void SendMove()
         {
-            Network.SendPacket( new MovePacket( Globals.Me.CurrentMap, Globals.Me.X, Globals.Me.Y, Globals.Me.Dir ) );
+            Network.SendPacket( new MovePacket( Globals.Me.CurrentMap, Globals.Me.X, Globals.Me.Y, Globals.Me.Dir, Globals.Me.Running ) );
         }
 
         public static void SendChatMsg( string msg, byte channel )
@@ -111,9 +111,9 @@ namespace Intersect.Client.Networking
             Network.SendPacket( new CreateCharacterPacket( name, classId, sprite ) );
         }
 
-        public static void SendInteractItem( Guid mapId, int tileIndex, int mouseTileIndex, Guid uniqueId )
+        public static void SendInteractItem( Guid mapId, int tileIndex, Guid uniqueId )
         {
-            Network.SendPacket( new InteractItemPacket( mapId, tileIndex, mouseTileIndex, uniqueId ) );
+            Network.SendPacket( new InteractItemPacket( mapId, tileIndex, uniqueId ) );
         }
 
         public static void SendPickupItem( Guid mapId, int tileIndex, Guid uniqueId )
@@ -126,9 +126,9 @@ namespace Intersect.Client.Networking
             Network.SendPacket( new SwapInvItemsPacket( item1, item2 ) );
         }
 
-        public static void SendDropItem( int slot, int amount )
+        public static void SendDropItem( int slot, int amount, Guid mapId = new Guid(), int dropX = 0, int dropY = 0 )
         {
-            Network.SendPacket( new DropItemPacket( slot, amount ) );
+            Network.SendPacket( new DropItemPacket( slot, amount, mapId, dropX, dropY ) );
         }
 
         public static void SendUseItem( int slot, Guid targetId )

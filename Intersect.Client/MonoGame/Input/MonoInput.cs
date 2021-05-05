@@ -267,7 +267,6 @@ namespace Intersect.Client.MonoGame.Input
         {
             return; //no on screen keyboard for pc clients
         }
-
     }
 
 }
