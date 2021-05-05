@@ -791,9 +791,12 @@ namespace Intersect.Server.Entities
         public virtual float GetMovementTime()
         {
             var time = 1000f / (float)( 1 + Math.Log( Stat[(int)Stats.Speed].Value() ) );
-            if( Running == 1 )
+            var StaminaCheck = GetVital(Vitals.Mana);
+            
+            if( Running == 1 && StaminaCheck != 0 )
             {
                 time *= 0.5f;
+                DepleteStamina(Vitals.Mana);
             }
             if( Blocking )
             {
@@ -1277,6 +1280,21 @@ namespace Intersect.Server.Entities
             var maxVitalValue = GetMaxVital( vitalId );
             var safeAmount = Math.Min( amount, GetVital( vital ) );
             SetVital( vital, GetVital( vital ) - safeAmount );
+        }
+        
+        public void DepleteStamina( Vitals vital )
+        {
+            var Stamina =  GetVital(Vitals.Mana);
+            
+            if( vital >= Vitals.VitalCount )
+            {
+                return;
+            }
+            
+            if( Stamina != 0 )
+            {
+                SubVital(Vitals.Mana, 1);
+            }
         }
 
         public virtual int[] GetStatValues()
