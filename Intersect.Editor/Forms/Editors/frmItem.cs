@@ -18,14 +18,14 @@ using Intersect.Utilities;
 namespace Intersect.Editor.Forms.Editors
 {
 
-    public partial class FrmItem : EditorForm
+    public partial class FrmItem : EditorForm // Form Items, a subclass of the Editor Forms/UI Windows
     {
 
-        private List<ItemBase> mChanged = new List<ItemBase>();
+        private List<ItemBase> mChanged = new List<ItemBase>(); // The list of items 
 
         private string mCopiedItem;
 
-        private ItemBase mEditorItem;
+        private ItemBase mEditorItem;          // Created the temporary EditorItem (for the ease of passing around multiple items)
 
         private List<string> mExpandedFolders = new List<string>();
 
@@ -33,11 +33,11 @@ namespace Intersect.Editor.Forms.Editors
 
         private List<string> mKnownCooldownGroups = new List<string>();
 
-        public FrmItem()
+        public FrmItem() //The class Form Item is defined here and defined as having:
         {
-            ApplyHooks();
-            InitializeComponent();
-            lstItems.LostFocus += itemList_FocusChanged;
+            ApplyHooks(); // PacketHandler Game Object update delegate 
+            InitializeComponent(); // Initialize the Editor Form
+            lstItems.LostFocus += itemList_FocusChanged; 
             lstItems.GotFocus += itemList_FocusChanged;
         }
 
